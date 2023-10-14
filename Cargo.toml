@@ -1,0 +1,20 @@
+[package]
+	edition = "2021"
+	name    = "rust-fluid-sim"
+	version = "0.1.0"
+
+	# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+	# Note: the `dynamic_linking` feature makes development faster, but requires the `libbevy_dylib` binary alongside
+	# the main binary. Remember to either revert this when releasing or to include the `libbevy_dylib` binary in the
+	# release.
+	bevy = { version = "0.11", features = ["dynamic_linking"] }
+
+# Enable a small amount of optimization in debug mode
+[profile.dev]
+	opt-level = 1
+
+	# Enable high optimizations for dependencies (incl. Bevy), but not for our code:
+	[profile.dev.package."*"]
+		opt-level = 3
